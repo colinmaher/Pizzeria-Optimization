@@ -1,6 +1,9 @@
 To run, enter colinmaher.github.io into your browser's address bar to view the site.
 
 To optimize this site I:
+
+
+
   -Inlined CSS
   -Added async to scripts
   -Moved inline JS to after end body tag
