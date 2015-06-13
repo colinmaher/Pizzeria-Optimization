@@ -545,11 +545,11 @@ function createPizzas() {
     // Instead of 200 elements, we now generate (cols * rows) element
 
     for (var i = 0; i < cols * rows; i++) {
-        // Here we get the html for the current element by calling pizza.
+        // Here we get the html for the current element by calling addPizza.
         html += addPizza((Math.floor(i / cols) * s), (i % cols) * s);
     }
 
-    // Changed the code so that the DOM is updated once instead of in a loop
+    // DOM updated once instead of in a loop
     document.querySelector("#movingPizzas1").innerHTML = html;
 
     requestUpdate();
