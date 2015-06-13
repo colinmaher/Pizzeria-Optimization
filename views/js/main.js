@@ -404,11 +404,11 @@ var pizzaElementGenerator = function (i) {
     return pizzaContainer;
 };
 
-// Changes the value for the size of the pizza above the slider
+// Changes the size labels as well as the size of each random pizza image on the page
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
 
-  // Changes the value for the size of the pizza above the slider
+  // Changes the label
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
@@ -452,11 +452,9 @@ var resizePizzas = function(size) {
     return dx;
   }
 
-  // Iterates through pizza elements on the page and changes their widths
+  // changes the width of the random pizza image
   function changePizzaSizes(size) {
       var allPizzas = document.querySelectorAll(".randomPizzaContainer");
-      
-      // Since all pizza are the same size, it's only necessary to get dx and newwidth once, then apply to all pizzas
       var dx = determineDx(allPizzas[0], size);
       var newwidth = (allPizzas[0].offsetWidth + dx) + 'px';
       
@@ -502,9 +500,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
     console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
-// The following code for sliding background pizzas was pulled from Ilya's demo found at:
-// https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
-
 // Moves the background pizzas when scrolled
 function updatePositions() {
     frame++;
@@ -517,13 +512,13 @@ function updatePositions() {
 
     for (var i = 0; i < items.length; i++) {
         //This variable was made to ensure no two rows of pizzas are moving simultaneously
-        var phase = Math.sin((latestScrollY / 1250) + (i % (cols + 1)));
+        var offset = Math.sin((latestScrollY / 1250) + (i % (cols + 1)));
 
         //html is built
-        html += addPizza((Math.floor(i / cols) * s), (i % cols) * s + 100 * phase);
+        html += addPizza((Math.floor(i / cols) * s), (i % cols) * s + 100 * offset);
     }
 
-    // Now that the loop is done, I update the DOM once with the generated html.
+    // Dom updated once instead of in a loop
     document.querySelector("#movingPizzas1").innerHTML = html;
 
     // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -545,7 +540,6 @@ function createPizzas() {
     // Instead of 200 elements, we now generate (cols * rows) element
 
     for (var i = 0; i < cols * rows; i++) {
-        // Here we get the html for the current element by calling addPizza.
         html += addPizza((Math.floor(i / cols) * s), (i % cols) * s);
     }
 
