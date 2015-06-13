@@ -24,3 +24,4 @@ To optimize pizza.html I:
 Resources used:
 
 https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
+https://github.com/udacity/fend-office-hours/tree/master/Web%20Optimization/Effective%20Optimizations%20for%2060%20FPS
