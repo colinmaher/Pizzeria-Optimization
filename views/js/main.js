@@ -454,7 +454,7 @@ var resizePizzas = function(size) {
 
   // changes the width of the random pizza image
   function changePizzaSizes(size) {
-      var allPizzas = document.querySelectorAll(".randomPizzaContainer");
+      var allPizzas = document.getElementsByClassName("randomPizzaContainer");
       var dx = determineDx(allPizzas[0], size);
       var newwidth = (allPizzas[0].offsetWidth + dx) + 'px';
       
@@ -475,11 +475,10 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
-    var pizzasDiv = document.getElementById("randomPizzas");
+var pizzasDiv = document.getElementById("randomPizzas");
+for (var i = 2; i < 100; i++) { 
     pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
-
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
 window.performance.measure("measure_pizza_generation", "mark_start_generating", "mark_end_generating");
@@ -499,14 +498,17 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
     }
     console.log("Average time to generate last 10 frames: " + sum / 10 + "ms");
 }
-
 // Moves the background pizzas when scrolled
 function updatePositions() {
     frame++;
     window.performance.mark("mark_start_frame");
     update = false;
-    var items = document.querySelectorAll('.mover');
+    //selects each mover
+    var items = document.getElementsByClassName('mover');
+    //used to build html to be added to page
     var html = '';
+    
+   //Variables used to obtain an accurate number of pizzas to display
     var cols = getDimensions().cols;
     var s = getDimensions().s;
 
@@ -514,7 +516,7 @@ function updatePositions() {
         //This variable was made to ensure no two rows of pizzas are moving simultaneously
         var offset = Math.sin((latestScrollY / 1250) + (i % (cols + 1)));
 
-        //html is built
+        //html is built using addPizza function
         html += addPizza((Math.floor(i / cols) * s), (i % cols) * s + 100 * offset);
     }
 
@@ -535,9 +537,10 @@ function createPizzas() {
     var cols = getDimensions().cols;
     var rows = getDimensions().rows;
     var s = getDimensions().s;
+    //used to build html to be added to page
     var html = '';
 
-    // Instead of 200 elements, we now generate (cols * rows) element
+    // Instead of 200 elements, we now generate cols*rows element 
 
     for (var i = 0; i < cols * rows; i++) {
         html += addPizza((Math.floor(i / cols) * s), (i % cols) * s);
@@ -549,6 +552,7 @@ function createPizzas() {
     requestUpdate();
 }
 //creates the html to be added to the DOM
+//this function takes in the dimensions and returns the necessary html to add 
 function addPizza(top, left) {
     var pizza = '<img class="mover" src="images/pizza.png" style="height: 100px; width: 73.333px; ';
     pizza += 'top: ' + top + 'px; ';
@@ -556,8 +560,7 @@ function addPizza(top, left) {
 
     return pizza;
 }
-
-//determines how many pizzas will be used based on the size of the page
+//obtains to dimensions of the page for use in createPizzas and updatePositions
 function getDimensions() {
     var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -569,17 +572,14 @@ function getDimensions() {
         s: s
     };
 }
-
 var latestScrollY = 0;
 //bool that determines if an update is needed
 var update = false;
-
 //updates latest scroll
 window.addEventListener('scroll', function () {
     latestScrollY = window.scrollY;
     requestUpdate();
 });
-
 //updates the location of the pizzas on scroll
 function requestUpdate() {
     if (!update) {
@@ -587,12 +587,10 @@ function requestUpdate() {
     }
     update = true;
 }
-
 //adds pizzas to DOM when page is loaded
 document.addEventListener('DOMContentLoaded', function () {
     createPizzas();
 });
-
 //recreate pizzas when windows is resized 
 window.addEventListener('resize', function () {
     createPizzas();
