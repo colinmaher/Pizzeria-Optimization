@@ -384,7 +384,7 @@ var pizzaElementGenerator = function (i) {
     pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
     pizzaImageContainer.classList.add("col-md-6");
 
-    pizzaImage.src = "images/pizza.png";
+    pizzaImage.src = "views/images/pizza.png";
     pizzaImage.classList.add("img-responsive");
     pizzaImageContainer.appendChild(pizzaImage);
     pizzaContainer.appendChild(pizzaImageContainer);
@@ -554,7 +554,7 @@ function createPizzas() {
 //creates the html to be added to the DOM
 //this function takes in the dimensions and returns the necessary html to add 
 function addPizza(top, left) {
-    var pizza = '<img class="mover" src="images/pizza.png" style="height: 100px; width: 73.333px; ';
+    var pizza = '<img class="mover" src="views/images/pizza.png" style="height: 100px; width: 73.333px; ';
     pizza += 'top: ' + top + 'px; ';
     pizza += 'left: ' + left + 'px;">';
 
