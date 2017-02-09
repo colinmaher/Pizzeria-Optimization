@@ -1,6 +1,4 @@
-To run, enter colinmaher.github.io into your browser's address bar to view the site.
-Or alternatively, download and extract the github repo and run index.html in your browser.
-
+## [Live Version](http://colinmaher.github.io/Pizzeria-Optimization/)
 To optimize this index.html I:
 
 
@@ -21,7 +19,7 @@ To optimize pizza.html I:
 -changed the page so that instead of putting a set number of sliding pizzas on the page, the number of pizzas on the page is determined by the dimensions of the page.
 -I also changed it so that instead of updating the DOM many times in a loop, the DOM is updated once with all the sliding pizzas
 
-Resources used:
+## Resources used:
 
 https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization
 https://github.com/udacity/fend-office-hours/tree/master/Web%20Optimization/Effective%20Optimizations%20for%2060%20FPS
